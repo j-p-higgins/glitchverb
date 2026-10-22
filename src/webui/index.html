@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kink Drones</title>
+    </head>
+    <body>
+        <h1>Kink Drones</h1>
+        <div id="app">
+            <div class="param">
+                <div class="param-header">
+                <span class="param-name">Kink 1</span>
+                <span class="param-value" id="val-kink1">0.000</span>
+                </div>
+                <input type="range" id="slider-kink1" min="0" max="1" step="0.001" value="0">
+            </div>
+
+            <div class="param">
+                <div class="param-header">
+                <span class="param-name">Kink 2</span>
+                <span class="param-value" id="val-kink2">0.000</span>
+                </div>
+                <input type="range" id="slider-kink2" min="0" max="1" step="0.001" value="0">
+            </div>
+
+            <div class="param">
+                <div class="param-header">
+                <span class="param-name">Kink 3</span>
+                <span class="param-value" id="val-kink3">0.000</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="toggle-automate"><label for="toggle-automate">Automate</label>
+                <input type="range" id="slider-kink3" min="0" max="1" step="0.001" value="0">
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="./main.js"></script>
+    </body>
+</html>
