@@ -17,11 +17,11 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
     : AudioProcessorEditor (p)
     , _audioProcessor (p)
     , _rnboObject (rnboObject)
-    , _kink1Attachment(findParameter(p, "kink1"), _kink1Slider)
-    , _kink2Attachment(findParameter(p, "kink2"), _kink2Slider)
-    , _kink3Attachment(findParameter(p, "kink3"), _kink3Slider)
+    , _clockSpeedAttachment(findParameter(p, "clock_speed"), _clockSpeedSlider)
+    , _decayAttachment(findParameter(p, "decay"), _decaySlider)
+    , _dryWetAttachment(findParameter(p, "dry_wet"), _dryWetSlider)
 {
-    for (auto* s : { &_kink1Slider, &_kink2Slider, &_kink3Slider })
+    for (auto* s : { &_clockSpeedSlider, &_decaySlider, &_dryWetSlider })
     {
         s->setSliderStyle (Slider::LinearHorizontal);
         s->setTextBoxStyle (Slider::TextBoxRight, false, 60, 20);
@@ -35,9 +35,9 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
         addAndMakeVisible (label);
     };
 
-    setupLabel (_kink1Label, "Kink 1");
-    setupLabel (_kink2Label, "Kink 2");
-    setupLabel (_kink3Label, "Kink 3");
+    setupLabel (_clockSpeedLabel, "Clock Speed");
+    setupLabel (_decayLabel, "Decay");
+    setupLabel (_dryWetLabel, "Dry/Wet");
 
     setSize (400, 160);
 }
@@ -61,7 +61,7 @@ void CustomAudioEditor::resized()
         slider.setBounds (row);
     };
 
-    layoutRow (_kink1Label, _kink1Slider);
-    layoutRow (_kink2Label, _kink2Slider);
-    layoutRow (_kink3Label, _kink3Slider);
+    layoutRow (_clockSpeedLabel, _clockSpeedSlider);
+    layoutRow (_decayLabel, _decaySlider);
+    layoutRow (_dryWetLabel, _dryWetSlider);
 }

@@ -18,12 +18,12 @@ private:
 
     // Sliders must be declared before attachments; SliderParameterAttachment
     // registers with the slider on construction.
-    Slider _kink1Slider, _kink2Slider, _kink3Slider;
-    Label  _kink1Label,  _kink2Label,  _kink3Label;
+    Slider _clockSpeedSlider, _decaySlider, _dryWetSlider;
+    Label  _clockSpeedLabel,  _decayLabel,  _dryWetLabel;
 
-    SliderParameterAttachment _kink1Attachment;
-    SliderParameterAttachment _kink2Attachment;
-    SliderParameterAttachment _kink3Attachment;
+    SliderParameterAttachment _clockSpeedAttachment;
+    SliderParameterAttachment _decayAttachment;
+    SliderParameterAttachment _dryWetAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CustomAudioEditor)
 };
