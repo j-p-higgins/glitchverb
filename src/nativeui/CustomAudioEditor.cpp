@@ -1,5 +1,6 @@
 #include "CustomAudioEditor.h"
 #include "BinaryData.h"
+#include "MyColours.h"
 
 static juce::RangedAudioParameter&
 findParameter(RNBO::JuceAudioProcessor* p, const juce::String& name)
@@ -27,8 +28,9 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
 
     for (auto* s : { &_clockSpeedSlider, &_decaySlider, &_dryWetSlider })
     {
-        s->setSliderStyle (Slider::LinearHorizontal);
-        s->setTextBoxStyle (Slider::TextBoxRight, false, 60, 20);
+        s->setSliderStyle (juce::Slider::LinearBar);
+        s->setTextBoxStyle (juce::Slider::TextBoxBelow, true, 100, 50);
+        s->setLookAndFeel (&mainSliderLookAndFeel);
         addAndMakeVisible (s);
     }
 
@@ -36,6 +38,8 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
     {
         label.setText (text, dontSendNotification);
         label.setJustificationType (Justification::bottomLeft);
+        label.setFont(juce::Font(25.0f));
+		label.setColour(Label::textColourId, MyColours::mainText);
         addAndMakeVisible (label);
     };
 
@@ -43,7 +47,8 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
         {
             label.setText(text, dontSendNotification);
             label.setJustificationType(Justification::centredRight);
-            label.setFont(juce::Font(35.0f));
+            label.setFont(juce::Font(40.0f));
+            label.setColour(Label::textColourId, MyColours::accentText);
             addAndMakeVisible(label);
         };
 
@@ -52,14 +57,14 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
     setupLabel (_decayLabel, "decay");
     setupLabel (_dryWetLabel, "dry wet");
 
-    setSize (350, 210);
+    setSize (350, 260);
 }
 
 CustomAudioEditor::~CustomAudioEditor() = default;
 
 void CustomAudioEditor::paint (Graphics& g)
 {
-    g.fillAll (juce::Colour (149, 114, 207));
+    g.fillAll (MyColours::background);
 }
 
 void CustomAudioEditor::resized()
