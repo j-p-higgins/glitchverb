@@ -19,7 +19,7 @@ private:
     // Sliders must be declared before attachments; SliderParameterAttachment
     // registers with the slider on construction.
     Slider _clockSpeedSlider, _decaySlider, _dryWetSlider;
-    Label  _clockSpeedLabel,  _decayLabel,  _dryWetLabel;
+    Label  _mainLabel,  _clockSpeedLabel,  _decayLabel,  _dryWetLabel;
 
     SliderParameterAttachment _clockSpeedAttachment;
     SliderParameterAttachment _decayAttachment;

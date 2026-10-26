@@ -1,4 +1,5 @@
 #include "CustomAudioEditor.h"
+#include "BinaryData.h"
 
 static juce::RangedAudioParameter&
 findParameter(RNBO::JuceAudioProcessor* p, const juce::String& name)
@@ -21,6 +22,9 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
     , _decayAttachment(findParameter(p, "decay"), _decaySlider)
     , _dryWetAttachment(findParameter(p, "dry_wet"), _dryWetSlider)
 {
+	auto majorMonoDisplayRegular = juce::Typeface::createSystemTypefaceFor(BinaryData::MajorMonoDisplayRegular_ttf, BinaryData::MajorMonoDisplayRegular_ttfSize);
+	juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypeface(majorMonoDisplayRegular);
+
     for (auto* s : { &_clockSpeedSlider, &_decaySlider, &_dryWetSlider })
     {
         s->setSliderStyle (Slider::LinearHorizontal);
@@ -31,37 +35,43 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
     auto setupLabel = [this] (Label& label, const char* text)
     {
         label.setText (text, dontSendNotification);
-        label.setJustificationType (Justification::centredLeft);
+        label.setJustificationType (Justification::bottomLeft);
         addAndMakeVisible (label);
     };
 
-    setupLabel (_clockSpeedLabel, "Clock Speed");
-    setupLabel (_decayLabel, "Decay");
-    setupLabel (_dryWetLabel, "Dry/Wet");
+    auto setupHeader = [this](Label& label, const char* text)
+        {
+            label.setText(text, dontSendNotification);
+            label.setJustificationType(Justification::centredRight);
+            label.setFont(juce::Font(35.0f));
+            addAndMakeVisible(label);
+        };
 
-    setSize (400, 160);
+    setupHeader(_mainLabel, "Glitch Verb");
+    setupLabel (_clockSpeedLabel, "clock speed");
+    setupLabel (_decayLabel, "decay");
+    setupLabel (_dryWetLabel, "dry wet");
+
+    setSize (350, 210);
 }
 
 CustomAudioEditor::~CustomAudioEditor() = default;
 
 void CustomAudioEditor::paint (Graphics& g)
 {
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+    g.fillAll (juce::Colour (149, 114, 207));
 }
 
 void CustomAudioEditor::resized()
 {
-    auto area = getLocalBounds().reduced (16);
-    const int rowHeight = area.getHeight() / 3;
+    auto area = getLocalBounds().reduced (10);
+    const int rowHeight = area.getHeight() / 7;
+    _mainLabel.setBounds(area.removeFromTop(rowHeight));
+	_clockSpeedLabel.setBounds(area.removeFromTop(rowHeight));
+	_clockSpeedSlider.setBounds(area.removeFromTop(rowHeight));
+	_decayLabel.setBounds(area.removeFromTop(rowHeight));
+	_decaySlider.setBounds(area.removeFromTop(rowHeight));
+	_dryWetLabel.setBounds(area.removeFromTop(rowHeight));
+	_dryWetSlider.setBounds(area.removeFromTop(rowHeight));
 
-    auto layoutRow = [&] (Label& label, Slider& slider)
-    {
-        auto row = area.removeFromTop (rowHeight);
-        label.setBounds (row.removeFromLeft (60));
-        slider.setBounds (row);
-    };
-
-    layoutRow (_clockSpeedLabel, _clockSpeedSlider);
-    layoutRow (_decayLabel, _decaySlider);
-    layoutRow (_dryWetLabel, _dryWetSlider);
 }

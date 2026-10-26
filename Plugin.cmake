@@ -38,6 +38,10 @@ juce_add_plugin(RNBOAudioPlugin
   PRODUCT_NAME "Glitch Verb"           # The name of the final executable, which can differ from the target name
   ${_needs_web_browser})
 
+juce_add_binary_data(BinaryData
+     SOURCES
+         resources/MajorMonoDisplayRegular.ttf)
+
 # `juce_generate_juce_header` will create a JuceHeader.h for a given target, which will be generated
 # into your build tree. This should be included with `#include <JuceHeader.h>`. The include path for
 # this header will be automatically added to the target. The main function of the JuceHeader is to
@@ -107,8 +111,11 @@ target_compile_definitions(RNBOAudioPlugin
 # linked automatically. If we'd generated a binary data target above, we would need to link to it
 # here too. This is a standard CMake command.
 
+
+
 target_link_libraries(RNBOAudioPlugin
   PRIVATE
+  BinaryData
   juce::juce_audio_utils
   juce::juce_gui_extra
   PUBLIC
