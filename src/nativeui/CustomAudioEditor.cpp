@@ -1,6 +1,6 @@
 #include "CustomAudioEditor.h"
-#include "BinaryData.h"
-#include "MyColours.h"
+#include "UIColours.h"
+#include "UIFonts.h"
 
 static juce::RangedAudioParameter&
 findParameter(RNBO::JuceAudioProcessor* p, const juce::String& name)
@@ -23,9 +23,6 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
     , _decayAttachment(findParameter(p, "decay"), _decaySlider)
     , _dryWetAttachment(findParameter(p, "dry_wet"), _dryWetSlider)
 {
-	auto majorMonoDisplayRegular = juce::Typeface::createSystemTypefaceFor(BinaryData::MajorMonoDisplayRegular_ttf, BinaryData::MajorMonoDisplayRegular_ttfSize);
-	juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypeface(majorMonoDisplayRegular);
-
     for (auto* s : { &_clockSpeedSlider, &_decaySlider, &_dryWetSlider })
     {
         s->setSliderStyle (juce::Slider::LinearBar);
@@ -34,28 +31,21 @@ CustomAudioEditor::CustomAudioEditor (RNBO::JuceAudioProcessor* const p,
         addAndMakeVisible (s);
     }
 
-    auto setupLabel = [this] (Label& label, const char* text)
+    auto setupLabel = [this] (Label& label, const char* text, const UIFonts::Style& style)
     {
         label.setText (text, dontSendNotification);
-        label.setJustificationType (Justification::bottomLeft);
-        label.setFont(juce::Font(25.0f));
-		label.setColour(Label::textColourId, MyColours::mainText);
+        label.setFont(style.font);
+        label.setColour(Label::textColourId, style.colour);
+        label.setJustificationType (style.justification);
+        label.setBorderSize(style.border);
         addAndMakeVisible (label);
     };
 
-    auto setupHeader = [this](Label& label, const char* text)
-        {
-            label.setText(text, dontSendNotification);
-            label.setJustificationType(Justification::centredRight);
-            label.setFont(juce::Font(40.0f));
-            label.setColour(Label::textColourId, MyColours::accentText);
-            addAndMakeVisible(label);
-        };
 
-    setupHeader(_mainLabel, "Glitch Verb");
-    setupLabel (_clockSpeedLabel, "clock speed");
-    setupLabel (_decayLabel, "decay");
-    setupLabel (_dryWetLabel, "dry wet");
+    setupLabel(_mainLabel, "Glitch Verb", UIFonts::header());
+    setupLabel (_clockSpeedLabel, "clock speed", UIFonts::parameter());
+    setupLabel (_decayLabel, "decay", UIFonts::parameter());
+    setupLabel (_dryWetLabel, "dry wet", UIFonts::parameter());
 
     setSize (350, 260);
 }
@@ -64,7 +54,7 @@ CustomAudioEditor::~CustomAudioEditor() = default;
 
 void CustomAudioEditor::paint (Graphics& g)
 {
-    g.fillAll (MyColours::background);
+    g.fillAll (UIColours::background);
 }
 
 void CustomAudioEditor::resized()

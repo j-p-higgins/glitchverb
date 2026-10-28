@@ -1,7 +1,7 @@
 #pragma once
 #include <JuceHeader.h>
 
-namespace MyColours
+namespace UIColours
 {
 	const juce::Colour accentText{ 0xff251f2e };
     const juce::Colour mainText{ 0xffE9E6EA };
