@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Big Sparkle",
+    "preset": {
+      "clock_speed": {
+        "value": 0.6000000000000001
+      },
+      "decay": {
+        "value": 0.7000000000000001
+      },
+      "dry_wet": {
+        "value": 1
+      }
+    }
+  },
+  {
+    "name": "Endless Glitch",
+    "preset": {
+      "clock_speed": {
+        "value": 0.4
+      },
+      "decay": {
+        "value": 1
+      },
+      "dry_wet": {
+        "value": 1
+      }
+    }
+  },
+  {
+    "name": "Small Shimmer",
+    "preset": {
+      "clock_speed": {
+        "value": 0.5
+      },
+      "decay": {
+        "value": 0.3
+      },
+      "dry_wet": {
+        "value": 1
+      }
+    }
+  },
+  {
+    "name": "Completely Broken",
+    "preset": {
+      "clock_speed": {
+        "value": 0.1
+      },
+      "decay": {
+        "value": 0.5
+      },
+      "dry_wet": {
+        "value": 1
+      }
+    }
+  },
+  {
+    "name": "Nearly Normal",
+    "preset": {
+      "clock_speed": {
+        "value": 0.75
+      },
+      "decay": {
+        "value": 0.9
+      },
+      "dry_wet": {
+        "value": 1
+      }
+    }
+  },
+  {
+    "name": "Glitched Echoes",
+    "preset": {
+      "clock_speed": {
+        "value": 0.35
+      },
+      "decay": {
+        "value": 0
+      },
+      "dry_wet": {
+        "value": 1
+      }
+    }
+  }
+]

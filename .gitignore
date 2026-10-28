@@ -2,6 +2,5 @@
 build/
 !/build/.gitkeep
 .vscode
-export/*
 .cache
 .vs
